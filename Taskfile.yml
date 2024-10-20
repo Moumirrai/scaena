@@ -1,0 +1,46 @@
+version: '3'
+
+tasks:
+  # Task to build the Go project
+  build-backend:
+    cmds:
+      - go build -v main.go
+    desc: Build the Go backend
+
+  # Task to run the Go project
+  run-backend:
+    cmds:
+      - go run main.go
+    desc: Run the Go backend
+
+  # Task to build the frontend using npm
+  build-frontend:
+    cmds:
+      - cd ./frontend && npm run build
+    desc: Build the frontend with npm
+
+  # Task to run the frontend in dev mode using npm
+  dev-frontend:
+    cmds:
+      - cd ./frontend && npm run dev
+    desc: Run the frontend in development mode
+
+  # Task to build both backend and frontend
+  build:
+    deps:
+      - build-backend
+      - build-frontend
+    desc: Build both the backend and frontend
+
+  # Task to run both backend and frontend in dev mode
+  dev:
+    deps:
+      - run-backend
+      - dev-frontend
+    desc: Run both backend and frontend in development mode
+
+  install-deps:
+    cmds:
+      - go mod tidy  # Cleans up and ensures go.mod matches the actual source code
+      - cd ./frontend && npm i
+    desc: Ensure Go backend dependencies are installed
