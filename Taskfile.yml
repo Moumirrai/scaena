@@ -4,13 +4,13 @@ tasks:
   # Task to build the Go project
   build-backend:
     cmds:
-      - go build -v main.go
+      - go build ./cmd/main.go
     desc: Build the Go backend
 
   # Task to run the Go project
   run-backend:
     cmds:
-      - go run main.go
+      - go run ./cmd/main.go
     desc: Run the Go backend
 
   # Task to build the frontend using npm
